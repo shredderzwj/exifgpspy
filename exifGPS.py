@@ -64,10 +64,10 @@ class GPSInfo(object):
         :return: tuple 返回 度分秒格式的坐标值，为三元组，三个值分别为度分秒
         """
         try:
-            (d1, d2), (m1, m2), (s1, s2) = self.gps_info_raw.get(ref_code + 1)
-            d = d1 / d2
-            m = m1 / m2
-            s = s1 / s2
+            d, m, s = self.gps_info_raw.get(ref_code + 1)
+            d = float(d)
+            m = float(m)
+            s = float(s)
             if self.gps_info_raw.get(ref_code) == 'W' or self.gps_info_raw.get(ref_code) == 'S':
                 return -d, -m, -s
             return d, m, s
@@ -136,21 +136,3 @@ if __name__ == '__main__':
                     print('This image does not have GPSInfo -> {}'.format(file))
         else:
             print('输入的文件不存在！！')
-    
-    # ##################### test #############################
-    def test():
-        info = GPSInfo('test.jpg')
-        print(info)
-
-        import coordinate_transform
-        amap_coord = coordinate_transform.wgs84_to_gcj02(*info.coordinate)
-        bmap_coord = coordinate_transform.wgs84_to_bd09(*info.coordinate)
-        print('高德地图坐标：', amap_coord)
-        print('百度地图坐标：', bmap_coord)
-        
-        from amap import AMapReGeo
-        AMAP_KEY = '4f53456651571c48e8b089f85a2b79ef'  # 我的高德key
-
-        regeo = AMapReGeo("{},{}".format(*amap_coord), AMAP_KEY)
-        print("拍摄地址：", regeo.formatted_address)
-    # test()

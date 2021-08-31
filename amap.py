@@ -50,7 +50,7 @@ class AMapGeoAndReGeoBase(object):
 
 
 class AMapGeo(AMapGeoAndReGeoBase):
-    def __init__(self, address, key='4f53456651571c48e8b089f85a2b79ef', city=None, batch=None, sig=None,
+    def __init__(self, address, key, city=None, batch=None, sig=None,
                  callback=None, api_url="http://restapi.amap.com/v3/geocode/geo"):
         """
         将详细的结构化地址转换为高德经纬度坐标。且支持对地标性名胜景区、建筑物名称解析为高德经纬度坐标。
@@ -104,7 +104,7 @@ class AMapGeo(AMapGeoAndReGeoBase):
 
 
 class AMapReGeo(AMapGeoAndReGeoBase):
-    def __init__(self, location, key='4f53456651571c48e8b089f85a2b79ef', poitype=None, radius=None,
+    def __init__(self, location, key, poitype=None, radius=None,
                  extensions=None, batch=None, roadlevel=None, sig=None, callback=None, homeorcorp=None,
                  api_url='http://restapi.amap.com/v3/geocode/regeo'):
         """
@@ -246,14 +246,3 @@ class GeoDistance(object):
             distance += cls.single(*points[0], *points[-1], earth_radius)
         return distance
 
-
-if __name__ == '__main__':
-    geo = AMapGeo('郑州市燕庄地铁站')
-    print(geo())
-    print(geo.status)
-    print(geo.coordinates)
-
-    regeo = AMapReGeo('116.407387, 39.904179')
-    print(regeo())
-    print(regeo.status)
-    print(regeo.formatted_address)
