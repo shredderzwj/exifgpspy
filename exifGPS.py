@@ -130,7 +130,7 @@ if __name__ == '__main__':
         if os.path.exists(file):
             info = GPSInfo(file)
             if info.coordinate:
-                print(info.coordinate)
+                print("%f,%f"%info.coordinate)
             else:
                 if info.is_image:
                     print('This image does not have GPSInfo -> {}'.format(file))
