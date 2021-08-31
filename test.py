@@ -10,6 +10,7 @@ def test():
     import coordinate_transform
     amap_coord = coordinate_transform.wgs84_to_gcj02(*info.coordinate)
     bmap_coord = coordinate_transform.wgs84_to_bd09(*info.coordinate)
+    print('WGS84坐标：', info.coordinate)
     print('高德地图坐标：', amap_coord)
     print('百度地图坐标：', bmap_coord)
     
